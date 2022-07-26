@@ -2,6 +2,7 @@
   local db = require('dashboard')
   -- macos
   db.preview_command = 'cat | lolcat -F 0.3'
+  db.custom_header = 'cat | lolcat -F 0.3'
   -- linux
   -- db.preview_command = 'ueberzug'
   --

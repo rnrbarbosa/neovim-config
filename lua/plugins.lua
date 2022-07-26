@@ -40,6 +40,10 @@ return require('packer').startup(function()
 		"neovim/nvim-lspconfig",
 		config = [[require('config.lsp')]],
 	})
+    use {
+        "williamboman/nvim-lsp-installer",
+        "neovim/nvim-lspconfig",
+    }
 
 	-- completion
 	use ({
@@ -177,6 +181,12 @@ return require('packer').startup(function()
 		'glepnir/dashboard-nvim',
 		config = [[require('config.dashboard')]],
 	})
+
+    -- Code Formatter
+    use { 'mhartington/formatter.nvim' }
+
+    -- Git
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
 
 
