@@ -172,6 +172,12 @@ return require('packer').startup(function()
 
 	use ({ 'tweekmonster/startuptime.vim' })
 
+    -- Dashboard
+	use ({
+		'glepnir/dashboard-nvim',
+		config = [[require('config.dashboard')]],
+	})
+
 
 
 end)

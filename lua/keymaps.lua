@@ -72,9 +72,9 @@ vim.api.nvim_set_keymap('n', '<Leader>tt', ':Telescope find_file<CR>', opts)
 vim.api.nvim_set_keymap('n', '<Leader>tf', ':Telescope find_file<CR>', opts)
 
 -- competitive programming (toggle term)
--- vim.api.nvim_set_keymap('n', '<Leader>c', ':w <bar> :TermExec cmd="g++ -o %:r % -std=c++17 -O3 -Wall -lm -ggdb -fsanitize=address,undefined" size=50 direction=float go_back=0<CR>', opts)
--- vim.api.nvim_set_keymap('n', '<Leader>r', ':TermExec cmd="./%:r" size=50 direction=tab go_back=0<CR>', opts)
--- vim.api.nvim_set_keymap('n', '<Leader>r', ':TermExec cmd="python3 %" size=50 direction=tab go_back=0<CR>', opts)
+vim.api.nvim_set_keymap('n', '<Leader>c', ':w <bar> :TermExec cmd="g++ -o %:r % -std=c++17 -O3 -Wall -lm -ggdb -fsanitize=address,undefined" size=50 direction=float go_back=0<CR>', opts)
+vim.api.nvim_set_keymap('n', '<Leader>r', ':TermExec cmd="./%:r" size=50 direction=tab go_back=0<CR>', opts)
+vim.api.nvim_set_keymap('n', '<Leader>r', ':TermExec cmd="python3 %" size=50 direction=tab go_back=0<CR>', opts)
 
 vim.api.nvim_exec(
 [[
