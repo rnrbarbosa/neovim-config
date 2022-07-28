@@ -1,85 +1,70 @@
--- keymaps
+-----------------------------------------------------------
+-- Define keymaps of Neovim and installed plugins.
+-----------------------------------------------------------
 
-vim.g.mapleader = ' '
-local opts = { noremap = true, silent = true }
-
--- pairs
--- vim.api.nvim_set_keymap('i', '{<CR>', '{<CR>}<Esc>O', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('i', '{}', '{}', { noremap = true, silent = true })
-
--- better moving keys
-vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', {silent = true})
-
--- better indentation
-vim.api.nvim_set_keymap('v', '<', '<gv', opts)
-vim.api.nvim_set_keymap('v', '>', '>gv', opts)
-
--- better moving lines
-vim.api.nvim_set_keymap('v', 'J', ':m \'>+1<CR>gv=gv', opts)
-vim.api.nvim_set_keymap('v', 'K', ':m \'<-2<CR>gv=gv', opts)
-
--- undotree
-vim.api.nvim_set_keymap('n', '<Leader>u', ':UndotreeShow<CR>', opts)
-
--- resizing
-vim.api.nvim_set_keymap('n', '<Leader>-', ':vertical resize -5<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>=', ':vertical resize +5<CR>', opts)
-
--- ctrl+backspace
-vim.api.nvim_set_keymap('i', '<C-h>', '<C-w>', opts)
-
--- tab movements
-vim.api.nvim_set_keymap('n', '<Leader>n', ':bn<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>p', ':bp<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>tn', ':tabnew<Space>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>tm', ':tabmove<Space>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>tp', ':tabclose<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>to', ':tabonly<CR>', {noremap = true})
-
--- quickfix
-vim.api.nvim_set_keymap('n', '<Leader>j', ':cnext<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>k', ':cprev<CR>', opts)
-
--- file tree
-vim.api.nvim_set_keymap('n', '<Leader>f', ':NvimTreeToggle<CR>', {noremap = true})
-
--- toggle term
-function _G.set_terminal_keymaps()
-  local opt = {noremap = true}
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-[>', [[<C-\><C-n>]], opt)
-  vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opt)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opt)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opt)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opt)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opt)
+local function map(mode, lhs, rhs, opts)
+  local options = { noremap = true, silent = true }
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- Change leader to a comma
+vim.g.mapleader = ' '
 
--- lsp
-vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', opts)
-vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', opts)
-vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>rn', ':lua vim.lsp.buf.rename()<CR>', opts)
-vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', opts)
+-----------------------------------------------------------
+-- Neovim shortcuts
+-----------------------------------------------------------
 
--- telescope
-vim.api.nvim_set_keymap('n', '<Leader>tt', ':Telescope find_file<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>tf', ':Telescope find_file<CR>', opts)
+-- Disable arrow keys
+map('', '<up>', '<nop>')
+map('', '<down>', '<nop>')
+map('', '<left>', '<nop>')
+map('', '<right>', '<nop>')
 
--- competitive programming (toggle term)
-vim.api.nvim_set_keymap('n', '<Leader>c', ':w <bar> :TermExec cmd="g++ -o %:r % -std=c++17 -O3 -Wall -lm -ggdb -fsanitize=address,undefined" size=50 direction=float go_back=0<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>r', ':TermExec cmd="./%:r" size=50 direction=tab go_back=0<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>r', ':TermExec cmd="python3 %" size=50 direction=tab go_back=0<CR>', opts)
+-- Map Esc to kk
+map('i', 'kk', '<Esc>')
 
-vim.api.nvim_exec(
-[[
-autocmd FileType cpp nnoremap <leader>c :w <bar> :TermExec cmd="g++ -o %:r % -std=c++17 -O3 -Wall -lm -ggdb -fsanitize=address,undefined" size=50 direction=float<CR>
-autocmd FileType cpp nnoremap <leader>r :TermExec cmd="./%:r" size=50 direction=tab go_back=0<CR>
-autocmd FileType python nnoremap <leader>r :TermExec cmd="python3 %" size=50 direction=tab go_back=0<CR>
-autocmd FileType vimwiki set tw=80
-]], true)
+-- Clear search highlighting with <leader> and c
+map('n', '<leader>c', ':nohl<CR>')
+
+-- Toggle auto-indenting for code paste
+map('n', '<F2>', ':set invpaste paste?<CR>')
+vim.opt.pastetoggle = '<F2>'
+
+-- Change split orientation
+map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
+map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
+
+-- Move around splits using Ctrl + {h,j,k,l}
+map('n', '<C-h>', '<C-w>h')
+map('n', '<C-j>', '<C-w>j')
+map('n', '<C-k>', '<C-w>k')
+map('n', '<C-l>', '<C-w>l')
+
+-- Reload configuration without restart nvim
+map('n', '<leader>r', ':so %<CR>')
+
+-- Fast saving with <leader> and s
+map('n', '<leader>s', ':w<CR>')
+map('i', '<leader>s', '<C-c>:w<CR>')
+
+-- Close all windows and exit from Neovim with <leader> and q
+map('n', '<leader>q', ':qa!<CR>')
+
+-----------------------------------------------------------
+-- Applications and Plugins shortcuts
+-----------------------------------------------------------
+
+-- Terminal mappings
+map('n', '<C-t>', ':Term<CR>', { noremap = true })  -- open
+map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
+
+-- NvimTree
+map('n', '<C-n>', ':NvimTreeToggle<CR>')            -- open/close
+map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
+map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file
+
+-- Tagbar
+map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close

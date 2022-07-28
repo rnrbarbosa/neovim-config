@@ -42,7 +42,6 @@ return require('packer').startup(function()
 	})
     use {
         "williamboman/nvim-lsp-installer",
-        "neovim/nvim-lspconfig",
     }
 
 	-- completion
@@ -96,12 +95,18 @@ return require('packer').startup(function()
 
 	-- colorscheme
  	use ({ 
+ 		'arcticicestudio/nord-vim',
+ 	})
+
+ 	use ({ 
  		'folke/tokyonight.nvim',
- 	}) 
+ 	})
 
 	use ({
 		'rebelot/kanagawa.nvim',
 	})
+
+    use { 'lunarvim/colorschemes'}
 
     -- use ({
     --     'navarasu/onedark.nvim',
@@ -189,6 +194,14 @@ return require('packer').startup(function()
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
 
+    -- Notify
+    use { 'rcarriga/nvim-notify' }
+
+    --  Tagbar
+    use { 'majutsushi/tagbar'}
+    
+    --  floaterm
+    use { 'voldikss/vim-floaterm' }
 
 end)
 
