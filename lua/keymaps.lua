@@ -63,6 +63,7 @@ map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
 
 -- NvimTree
 map('n', '<C-f>', ':Telescope find_files<CR>')            -- open/close
+map('n', '<C-G>', ':Telescope grep_string<CR>')            -- open/close
 map('n', '<C-n>', ':NvimTreeToggle<CR>')            -- open/close
 map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
 map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file

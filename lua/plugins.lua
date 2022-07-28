@@ -55,8 +55,10 @@ return require('packer').startup(function()
 			"hrsh7th/cmp-nvim-lua",
 			-- "L3MON4D3/LuaSnip",
 			"onsails/lspkind-nvim",
+
 		}
 	})
+    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
 	-- treesitter
 	use ({
