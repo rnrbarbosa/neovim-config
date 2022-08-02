@@ -43,6 +43,12 @@ return require('packer').startup(function()
     use {
         "williamboman/nvim-lsp-installer",
     }
+	use ({
+        "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
+--		config = [[require('config.lsp.null-ls')]],
+	})
+
+
 
 	-- completion
 	use ({
@@ -53,12 +59,13 @@ return require('packer').startup(function()
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lua",
+            "saadparwaiz1/cmp_luasnip", -- snippet completions
 			-- "L3MON4D3/LuaSnip",
 			"onsails/lspkind-nvim",
 
 		}
 	})
-    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+    use {'tzachar/cmp-tabnine', run='./install.sh'}
 
 	-- treesitter
 	use ({
@@ -205,11 +212,6 @@ return require('packer').startup(function()
     --  floaterm
     use { 'voldikss/vim-floaterm' }
 
-      use "hrsh7th/nvim-cmp" -- The completion plugin
-      use "hrsh7th/cmp-buffer" -- buffer completions
-      use "hrsh7th/cmp-path" -- path completions
-      use "hrsh7th/cmp-cmdline" -- cmdline completions
-      use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
       -- snippets
       use "L3MON4D3/LuaSnip" --snippet engine
@@ -221,5 +223,14 @@ return require('packer').startup(function()
             require('gitsigns').setup()
           end
         }
+      use {
+          'folke/which-key.nvim',
+		  config = [[require('config.which-key')]],
+        }
+--       use {
+--           'mickael-menu/zk-nvim',
+-- 		   config = [[require('config.zk')]],
+--         }
+
 end)
 
