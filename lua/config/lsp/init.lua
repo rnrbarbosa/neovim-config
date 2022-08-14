@@ -24,10 +24,10 @@ M.server_capabilities = function()
   end)
 end
 
--- require "user.lsp.lsp-signature"
--- require "user.lsp.lsp-installer"
--- require("user.lsp.mason")
--- require("user.lsp.handlers").setup()
+require "config.lsp.lsp-signature"
+-- require "config.lsp.lsp-installer"
+-- require("config.lsp.mason")
+require("config.lsp.handlers").setup()
 require "config.lsp.null-ls"
 
 local l_status_ok, lsp_lines = pcall(require, "lsp_lines")

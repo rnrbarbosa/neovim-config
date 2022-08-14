@@ -48,6 +48,7 @@ return require('packer').startup(function()
 --		config = [[require('config.lsp.null-ls')]],
 	})
 
+    use "ray-x/lsp_signature.nvim"
 
 
 	-- completion
